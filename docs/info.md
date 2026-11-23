@@ -51,35 +51,63 @@ All number LEDs off means the pattern isn't a letter.
 
 | Letter | Morse | Number | 16 | 8 | 4 | 2 | 1 |
 |---|---|---:|:-:|:-:|:-:|:-:|:-:|
-| **A** | `.-` | 1 | · | · | · | · | ● |
-| **B** | `-...` | 2 | · | · | · | ● | · |
-| **C** | `-.-.` | 3 | · | · | · | ● | ● |
-| **D** | `-..` | 4 | · | · | ● | · | · |
-| **E** | `.` | 5 | · | · | ● | · | ● |
-| **F** | `..-.` | 6 | · | · | ● | ● | · |
-| **G** | `--.` | 7 | · | · | ● | ● | ● |
-| **H** | `....` | 8 | · | ● | · | · | · |
-| **I** | `..` | 9 | · | ● | · | · | ● |
-| **J** | `.---` | 10 | · | ● | · | ● | · |
-| **K** | `-.-` | 11 | · | ● | · | ● | ● |
-| **L** | `.-..` | 12 | · | ● | ● | · | · |
-| **M** | `--` | 13 | · | ● | ● | · | ● |
-| **N** | `-.` | 14 | · | ● | ● | ● | · |
-| **O** | `---` | 15 | · | ● | ● | ● | ● |
-| **P** | `.--.` | 16 | ● | · | · | · | · |
-| **Q** | `--.-` | 17 | ● | · | · | · | ● |
-| **R** | `.-.` | 18 | ● | · | · | ● | · |
-| **S** | `...` | 19 | ● | · | · | ● | ● |
-| **T** | `-` | 20 | ● | · | ● | · | · |
-| **U** | `..-` | 21 | ● | · | ● | · | ● |
-| **V** | `...-` | 22 | ● | · | ● | ● | · |
-| **W** | `.--` | 23 | ● | · | ● | ● | ● |
-| **X** | `-..-` | 24 | ● | ● | · | · | · |
-| **Y** | `-.--` | 25 | ● | ● | · | · | ● |
-| **Z** | `--..` | 26 | ● | ● | · | ● | · |
+| **A** | `.-` | 1 | Â· | Â· | Â· | Â· | â |
+| **B** | `-...` | 2 | Â· | Â· | Â· | â | Â· |
+| **C** | `-.-.` | 3 | Â· | Â· | Â· | â | â |
+| **D** | `-..` | 4 | Â· | Â· | â | Â· | Â· |
+| **E** | `.` | 5 | Â· | Â· | â | Â· | â |
+| **F** | `..-.` | 6 | Â· | Â· | â | â | Â· |
+| **G** | `--.` | 7 | Â· | Â· | â | â | â |
+| **H** | `....` | 8 | Â· | â | Â· | Â· | Â· |
+| **I** | `..` | 9 | Â· | â | Â· | Â· | â |
+| **J** | `.---` | 10 | Â· | â | Â· | â | Â· |
+| **K** | `-.-` | 11 | Â· | â | Â· | â | â |
+| **L** | `.-..` | 12 | Â· | â | â | Â· | Â· |
+| **M** | `--` | 13 | Â· | â | â | Â· | â |
+| **N** | `-.` | 14 | Â· | â | â | â | Â· |
+| **O** | `---` | 15 | Â· | â | â | â | â |
+| **P** | `.--.` | 16 | â | Â· | Â· | Â· | Â· |
+| **Q** | `--.-` | 17 | â | Â· | Â· | Â· | â |
+| **R** | `.-.` | 18 | â | Â· | Â· | â | Â· |
+| **S** | `...` | 19 | â | Â· | Â· | â | â |
+| **T** | `-` | 20 | â | Â· | â | Â· | Â· |
+| **U** | `..-` | 21 | â | Â· | â | Â· | â |
+| **V** | `...-` | 22 | â | Â· | â | â | Â· |
+| **W** | `.--` | 23 | â | Â· | â | â | â |
+| **X** | `-..-` | 24 | â | â | Â· | Â· | Â· |
+| **Y** | `-.--` | 25 | â | â | Â· | Â· | â |
+| **Z** | `--..` | 26 | â | â | Â· | â | Â· |
 
 ## External hardware
 
-- Two pushbuttons with 10 kΩ pull-down resistors, on ui[0] and ui[1].
-- Seven LEDs with 1 kΩ resistors, on uo[0]–uo[4], uo[6] and uo[7].
-- A 10 Hz clock.
+No extra hardware is needed. The Tiny Tapeout demo board can run the whole project.
+
+### On the board
+
+| Signal | Demo board |
+|---|---|
+| RECEIVE (ui[0]) | Input DIP switch 1 |
+| TAP (ui[1]) | Input DIP switch 2 |
+| LETTER_1 (uo[0]) | Segment A (top) |
+| LETTER_2 (uo[1]) | Segment B (top right) |
+| LETTER_4 (uo[2]) | Segment C (bottom right) |
+| LETTER_8 (uo[3]) | Segment D (bottom) |
+| LETTER_16 (uo[4]) | Segment E (bottom left) |
+| READY_LED (uo[6]) | Segment G (middle) |
+| TAP_LED (uo[7]) | Decimal point |
+
+Segment F stays off. The segments don't form a letter. Add up the lit segments to get the letter number.
+
+Set the project clock to 10 Hz in Tiny Tapeout Commander. The design doesn't use reset.
+
+### Optional: breadboard buttons and LEDs
+
+Tapping on a DIP switch is awkward, so you can use real buttons instead. No extra microcontroller is needed; wire the parts straight to the PMOD headers.
+
+- **Buttons:** wire each one 3.3 V -> pushbutton -> input pin.
+  - Put a 10 kÎ© pull-down resistor from the same pin to GND.
+  - Use ui[0] for Receive and ui[1] for Tap.
+  - Use 3.3 V only, never 5 V.
+- **LEDs:** wire each one output pin -> 1 kÎ© resistor -> LED -> GND.
+  - Use uo[0]-uo[4] for the number, uo[6] for Ready and uo[7] for Tap.
+- **Input switches:** keep the on-board input DIP switches off while buttons are connected. Set the board's inputs to manual (`mode = ASIC_MANUAL_INPUTS` in config.ini) so the RP2040 doesn't drive them.
