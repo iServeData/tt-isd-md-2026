@@ -49,34 +49,36 @@ The design has 30 flip-flops and 151 logic gates.
 
 All number LEDs off means the pattern isn't a letter.
 
+1 = LED on, 0 = LED off.
+
 | Letter | Morse | Number | 16 | 8 | 4 | 2 | 1 |
 |---|---|---:|:-:|:-:|:-:|:-:|:-:|
-| **A** | `.-` | 1 | Â· | Â· | Â· | Â· | â |
-| **B** | `-...` | 2 | Â· | Â· | Â· | â | Â· |
-| **C** | `-.-.` | 3 | Â· | Â· | Â· | â | â |
-| **D** | `-..` | 4 | Â· | Â· | â | Â· | Â· |
-| **E** | `.` | 5 | Â· | Â· | â | Â· | â |
-| **F** | `..-.` | 6 | Â· | Â· | â | â | Â· |
-| **G** | `--.` | 7 | Â· | Â· | â | â | â |
-| **H** | `....` | 8 | Â· | â | Â· | Â· | Â· |
-| **I** | `..` | 9 | Â· | â | Â· | Â· | â |
-| **J** | `.---` | 10 | Â· | â | Â· | â | Â· |
-| **K** | `-.-` | 11 | Â· | â | Â· | â | â |
-| **L** | `.-..` | 12 | Â· | â | â | Â· | Â· |
-| **M** | `--` | 13 | Â· | â | â | Â· | â |
-| **N** | `-.` | 14 | Â· | â | â | â | Â· |
-| **O** | `---` | 15 | Â· | â | â | â | â |
-| **P** | `.--.` | 16 | â | Â· | Â· | Â· | Â· |
-| **Q** | `--.-` | 17 | â | Â· | Â· | Â· | â |
-| **R** | `.-.` | 18 | â | Â· | Â· | â | Â· |
-| **S** | `...` | 19 | â | Â· | Â· | â | â |
-| **T** | `-` | 20 | â | Â· | â | Â· | Â· |
-| **U** | `..-` | 21 | â | Â· | â | Â· | â |
-| **V** | `...-` | 22 | â | Â· | â | â | Â· |
-| **W** | `.--` | 23 | â | Â· | â | â | â |
-| **X** | `-..-` | 24 | â | â | Â· | Â· | Â· |
-| **Y** | `-.--` | 25 | â | â | Â· | Â· | â |
-| **Z** | `--..` | 26 | â | â | Â· | â | Â· |
+| A | `.-` | 1 | 0 | 0 | 0 | 0 | 1 |
+| B | `-...` | 2 | 0 | 0 | 0 | 1 | 0 |
+| C | `-.-.` | 3 | 0 | 0 | 0 | 1 | 1 |
+| D | `-..` | 4 | 0 | 0 | 1 | 0 | 0 |
+| E | `.` | 5 | 0 | 0 | 1 | 0 | 1 |
+| F | `..-.` | 6 | 0 | 0 | 1 | 1 | 0 |
+| G | `--.` | 7 | 0 | 0 | 1 | 1 | 1 |
+| H | `....` | 8 | 0 | 1 | 0 | 0 | 0 |
+| I | `..` | 9 | 0 | 1 | 0 | 0 | 1 |
+| J | `.---` | 10 | 0 | 1 | 0 | 1 | 0 |
+| K | `-.-` | 11 | 0 | 1 | 0 | 1 | 1 |
+| L | `.-..` | 12 | 0 | 1 | 1 | 0 | 0 |
+| M | `--` | 13 | 0 | 1 | 1 | 0 | 1 |
+| N | `-.` | 14 | 0 | 1 | 1 | 1 | 0 |
+| O | `---` | 15 | 0 | 1 | 1 | 1 | 1 |
+| P | `.--.` | 16 | 1 | 0 | 0 | 0 | 0 |
+| Q | `--.-` | 17 | 1 | 0 | 0 | 0 | 1 |
+| R | `.-.` | 18 | 1 | 0 | 0 | 1 | 0 |
+| S | `...` | 19 | 1 | 0 | 0 | 1 | 1 |
+| T | `-` | 20 | 1 | 0 | 1 | 0 | 0 |
+| U | `..-` | 21 | 1 | 0 | 1 | 0 | 1 |
+| V | `...-` | 22 | 1 | 0 | 1 | 1 | 0 |
+| W | `.--` | 23 | 1 | 0 | 1 | 1 | 1 |
+| X | `-..-` | 24 | 1 | 1 | 0 | 0 | 0 |
+| Y | `-.--` | 25 | 1 | 1 | 0 | 0 | 1 |
+| Z | `--..` | 26 | 1 | 1 | 0 | 1 | 0 |
 
 ## External hardware
 
@@ -105,9 +107,9 @@ Set the project clock to 10 Hz in Tiny Tapeout Commander. The design doesn't use
 Tapping on a DIP switch is awkward, so you can use real buttons instead. No extra microcontroller is needed; wire the parts straight to the PMOD headers.
 
 - **Buttons:** wire each one 3.3 V -> pushbutton -> input pin.
-  - Put a 10 kÎ© pull-down resistor from the same pin to GND.
+  - Put a 10 k ohm pull-down resistor from the same pin to GND.
   - Use ui[0] for Receive and ui[1] for Tap.
   - Use 3.3 V only, never 5 V.
-- **LEDs:** wire each one output pin -> 1 kÎ© resistor -> LED -> GND.
+- **LEDs:** wire each one output pin -> 1 k ohm resistor -> LED -> GND.
   - Use uo[0]-uo[4] for the number, uo[6] for Ready and uo[7] for Tap.
 - **Input switches:** keep the on-board input DIP switches off while buttons are connected. Set the board's inputs to manual (`mode = ASIC_MANUAL_INPUTS` in config.ini) so the RP2040 doesn't drive them.
